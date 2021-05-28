@@ -1,24 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
-
+// Dependencies
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+// Elements
+import Navbar from "./elements/Navbar";
+import Footer from "./elements/Footer";
+// Components
+import Home from "./components/Home";
+import ProductInfo from "./components/ProductInfo";
+import Car from "./components/Car";
+import WishList from "./components/WishList";
+// Styles
+import "./App.css";
+import Box from "@material-ui/core/Box";
+import { makeStyles } from "@material-ui/core/styles";
+const useStyles = makeStyles((theme) => ({
+  content: {
+    minHeight: 840,
+  },
+}));
 function App() {
+  const classes = useStyles();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Navbar />
+      <Box className={classes.content}>
+        <Switch>
+          <Route path="/ProductInfo/:id">
+            <ProductInfo />
+          </Route>
+          <Route path="/mycar">
+            <Car />
+          </Route>
+          <Route path="/mywishlist">
+            <WishList />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </Box>
+
+      <Footer />
+    </BrowserRouter>
   );
 }
 
