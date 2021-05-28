@@ -1,25 +1,32 @@
+// Dependencies
 import React, { useEffect } from "react";
-import Typography from "@material-ui/core/Typography";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getProductInfo } from "../redux/shopActions";
+// Elements
 import SingleCard from "../elements/SingleCard";
+// Redux
+import { getProductInfo } from "../redux/shopActions";
+// Styles
+import Typography from "@material-ui/core/Typography";
+
 const ProductInfo = () => {
-  const { id } = useParams();
-  console.log(id);
+  const { id } = useParams(); // Capture params (named ":id")
+  // console.log('Url-Params: ', id);
+  // URL-API
   const singleUrl = `https://fakestoreapi.com/products/${id}/`;
-  const dispatch = useDispatch();
+  // Global state (Redux)
   const productInfo = useSelector((store) => store.mainShop.productInfo);
+  const dispatch = useDispatch();
   // Extract object properties
-  const { category, description, image, price, title } = productInfo;
-  console.log("product info: ", productInfo);
+  const { category, description, image, price, title } = productInfo; // Undefined until useEffect below is finished
+  // console.log("Product info: ", productInfo);
   useEffect(() => {
     dispatch(getProductInfo(singleUrl));
   }, [dispatch, singleUrl]);
   return (
     <div>
       <Typography gutterBottom variant="h5" component="h2">
-        Product Info: {id}
+        Product {id} description:
       </Typography>
 
       <SingleCard

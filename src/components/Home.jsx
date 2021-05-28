@@ -47,7 +47,7 @@ const Home = () => {
     dispatch(getAllProducts());
   }, [dispatch]);
 
-  // When click each category button dispatch an specific reducer to update at new state
+  // When click each category-button dispatch an specific reducer to update a new state
   const getProductByCategory = (event) => {
     console.log("Loading content for category: ", event.target.textContent);
     dispatch(getProductsByCategory(event.target.textContent));
@@ -69,6 +69,7 @@ const Home = () => {
   const showMoreCategories = () => {
     setShowCategories(true);
   };
+  // "active" state refers a current user is active, and application can access to user credentials
   return (
     <div>
       {active ? (
@@ -121,6 +122,7 @@ const Home = () => {
           <div className={classes.root}>
             <Grid container item xs={12} spacing={3}>
               {products !== undefined ? (
+                // Here starts consuming API
                 products.map((product) => {
                   return (
                     <Grid key={product.id} item xs={12} md={4}>

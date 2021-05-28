@@ -1,4 +1,10 @@
+// Dependencies
 import React from "react";
+// Elements
+import ButtonIcon from "./ButtonIcon";
+// Functions
+import AmountFormat from "../functions/Currency";
+// Styles
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -7,10 +13,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import AmountFormat from "../functions/Currency";
-import ButtonIcon from "./ButtonIcon";
 import Typography from "@material-ui/core/Typography";
-
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
@@ -19,18 +22,15 @@ const useStyles = makeStyles({
     marginRight: 3,
   },
   font: {
-    fontWeight: 600, // or 'bold'
+    fontWeight: 600, // 'Bold'
   },
 });
-
-/* function createData(title, category, quantity, price) {
-  return { title, category, quantity, price };
-} */
-
+// Receive items from Car component
 function TableU({ itemsLength, car, total }) {
   const classes = useStyles();
 
-  /*  const equalProduct = (car, index, item) => {
+  /* NEXT UPDATE "SHOW A TD FOR REPETITIVE PRODUCT INSTEAD ONE FOR EACH REPETITIVE PRODUCT "
+    const equalProduct = (car, index, item) => {
     if (index !== 0) {
       const currentProduct = item.quantity;
       const previousProduct = car[index - 1].quantity;

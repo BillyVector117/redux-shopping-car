@@ -1,4 +1,6 @@
+// Dependencies
 import React from "react";
+// Styles
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 
@@ -10,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-
+// Receive two params (Title (to "alt") and src (to show Image))
 function AvatarImage({ title, src }) {
   const classes = useStyles();
 

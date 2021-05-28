@@ -1,4 +1,13 @@
+// Dependencies
 import React from "react";
+// Elements
+import AvatarImage from "./AvatarImage";
+// Libraries
+import { useHistory } from "react-router-dom";
+// Functions
+import AmountFormat from "../functions/Currency";
+// Redux (Might use)
+// Styles
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -10,22 +19,17 @@ import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 // import TableHead from "@material-ui/core/TableHead";
-
-import AvatarImage from "./AvatarImage";
-import { useHistory } from "react-router-dom";
-
-import AmountFormat from "../functions/Currency";
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
 });
-
+// Instead "wishList" props we can access through Redux state
 function WishListTable({ wishList }) {
   const classes = useStyles();
   const history = useHistory();
-
   const rows = wishList;
+  // Click On preview button action
   const handlercheckProductButton = (event, id) => {
     event.preventDefault();
     history.push(`/ProductInfo/${id}`);

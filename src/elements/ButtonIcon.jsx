@@ -1,9 +1,12 @@
+// Dependencies
 import React from "react";
+// Redux
+import { useDispatch } from "react-redux";
+import { removeProductCar } from "../redux/shopActions";
+// Styles
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { useDispatch } from "react-redux";
-import { removeProductCar } from "../redux/shopActions";
 const useStyles = makeStyles((theme) => ({
   button: {
     margin: theme.spacing(1),
@@ -13,14 +16,14 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 1,
   },
 }));
-// "productId" refers to Index from Car array
+// "productId" refers to complete product object and "indexParam" refers to Index array for that item (Table Car section)
 function ButtonIcon({ productId, indexParam }) {
   const dispatch = useDispatch();
-  //const productInfo = useSelector((store) => store.mainShop.productInfo);
   const classes = useStyles();
+  // Delepe product action
   const HandlerDeleteProduct = () => {
     dispatch(removeProductCar(productId, indexParam));
-    console.log(`Deleting;: `, productId);
+    // console.log(`Deleting: `, productId);
   };
   return (
     <Button

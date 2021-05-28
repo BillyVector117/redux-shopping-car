@@ -1,6 +1,7 @@
+// Dependencies
 import axios from "axios";
 
-// Contstans
+// constant
 const initialData = {
   array: [],
   productsByCategory: [],
@@ -42,7 +43,7 @@ export default function shopReducer(state = initialData, action) {
 
 // Actions (Api call)
 export const getAllProducts = () => async (dispatch, getState) => {
-  // Check if data exists at LocalStorage
+  // Check if data exists at LocalStorage else, save it
   if (localStorage.getItem("products")) {
     dispatch({
       type: GET_ALL_PRODUCTS,
@@ -59,7 +60,7 @@ export const getAllProducts = () => async (dispatch, getState) => {
       type: GET_ALL_PRODUCTS,
       payload: result.data,
     });
-    // Save data at LocalStorage if no exists
+    // Save in LocalStorage
     localStorage.setItem("products", JSON.stringify(result.data));
     console.log("Data from API");
   } catch (error) {
@@ -91,7 +92,7 @@ export const getProductsByCategory =
       console.log(error);
     }
   };
-// Actions (Remove product car)
+// Actions, remove product from Car
 export const removeProductCar =
   (product, indexParam) => async (dispatch, getState) => {
     let mainStage = getState().mainShop; //
@@ -100,7 +101,7 @@ export const removeProductCar =
       // Return all products except the product passed as Param
       // return currentProduct.id !== product.id;
       return index !== indexParam;
-    }); // Buscar el index de filter y eliminar con eso el producto en vez de id (ya que el index 0 no existe como id de producto)
+    });
     const output = {
       ...mainStage,
       itemsLength: mainStage.itemsLength - 1,
@@ -118,6 +119,7 @@ export const removeProductCar =
       console.log(error);
     }
   };
+// Action show single preview product
 export const getProductInfo =
   (url = "https://fakestoreapi.com/products/1/") =>
   async (dispatch, getState) => {
@@ -194,6 +196,7 @@ export const addToCar =
       console.log(error);
     }
   };
+// Action add product to WishList
 export const addToWish = (product) => async (dispatch, getState) => {
   let stage = getState().mainShop;
   // CHECK IF CURRENT PRODUCT EXISTS IN STATE (USER CAN NOT ADD TWICE THE SAME PRODUCT )
@@ -222,6 +225,8 @@ export const addToWish = (product) => async (dispatch, getState) => {
     console.error("This product exists in your Wish List!");
   }
 };
+// Action remove product from WishList
+
 export const removeToWish = (product) => async (dispatch, getState) => {
   let stage = getState().mainShop;
   // CHECK IF CURRENT PRODUCT EXISTS IN STAGE, REMOVE FROM STATE IF TRUE

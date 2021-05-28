@@ -1,4 +1,11 @@
+// Dependencies
 import React, { useState } from "react";
+// Elements
+import AlertMessage from "../elements/AlertMessage";
+// Redux
+import { useDispatch, useSelector } from "react-redux";
+import { addToCar } from "../redux/shopActions";
+// Styles
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -6,10 +13,6 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
-import { useDispatch, useSelector } from "react-redux";
-import { addToCar } from "../redux/shopActions";
-import AlertMessage from "../elements/AlertMessage";
-
 const useStyles = makeStyles({
   root: {
     maxWidth: 700,
@@ -37,16 +40,19 @@ const useStyles = makeStyles({
   },
 });
 function BuyCard() {
-  const dispatch = useDispatch();
-  const productInfo = useSelector((store) => store.mainShop.productInfo);
   const classes = useStyles();
-  const [number, setNumber] = useState(null);
-  const [message, setMessage] = useState("");
-  const [type, setType] = useState("");
+  // Global state (Redux)
+  const productInfo = useSelector((store) => store.mainShop.productInfo);
+  const dispatch = useDispatch();
+  // Internal state
+  const [message, setMessage] = useState(""); // Custom message
+  const [type, setType] = useState(""); // Custom message
+  const [number, setNumber] = useState(null); // Number Input
 
+  // Add to car action
   const handlerSubmit = (event) => {
     event.preventDefault();
-    // console.log("numero dispatch: ",  number);
+    // console.log("Quantiry product (Input): ",  number);
     dispatch(addToCar(productInfo, number));
     setMessage("Added to Car");
     setType("success");

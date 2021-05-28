@@ -1,9 +1,12 @@
+// Dependencies
 import React, { useState } from "react";
+// Redux
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser, loginUserEmail } from "../redux/UserActions"; // Action
+// Styles
 import { makeStyles } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import { useDispatch, useSelector } from "react-redux";
-import { loginUser, loginUserEmail } from "../redux/UserActions"; // Action
 import Divider from "@material-ui/core/Divider";
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,44 +25,46 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-
+// "handleClose" is a function to close Modal
 const Form = ({ handleClose }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  // create state variables for each input
+  // Redux state
+  const loading = useSelector((store) => store.user.loading);
+  const active = useSelector((store) => store.user.active);
+  // Internal states (each input)
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // Redux state
-  const loading = useSelector((store) => store.user.loading);
-  const active = useSelector((store) => store.user.active);
-  //
+
+  /*
   console.group("loading in button");
   console.log(loading); // By default is true, once an actions is finished switch to false
   console.groupEnd();
   console.group("active user");
   console.log(active); // Changes to true once user is signed-in
-  console.groupEnd();
+  console.groupEnd(); */
 
   React.useEffect(() => {
-    console.group("useEffect: active user");
+    /* console.group("useEffect: active user");
     console.log(active);
-    console.groupEnd();
+    console.groupEnd(); */
+    // Is exists an user then close Modal
     if (active) {
       handleClose();
     }
   }, [active, handleClose]);
-  //
 
+  // Login action
   const handleSubmit = (event) => {
     // Sign In with E-mail
     event.preventDefault();
-    console.log(firstName, lastName, email, password);
+    // console.log(firstName, lastName, email, password);
     dispatch(loginUserEmail(email, password, firstName));
   };
+  // Login with Google action
   const handleSubmitGoogle = (event) => {
-    // Sign In with Google
     event.preventDefault();
     dispatch(loginUser());
   };

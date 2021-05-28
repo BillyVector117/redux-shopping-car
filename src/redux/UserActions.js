@@ -1,6 +1,6 @@
 import { auth, firebase, db } from "../firebase";
 // storage import
-// Contstans
+// Constants
 const initialData = {
   loading: false,
   active: false,
@@ -10,6 +10,7 @@ const LOADING = "LOADING";
 const LOGIN_ERROR = "LOGIN_ERROR";
 const LOGIN_USER = "LOGIN_USER";
 const LOG_OUT = "LOG_OUT";
+const LOG_OUT_SESSION = "LOG_OUT_SESSION";
 // Reducers
 export default function shopReducer(state = initialData, action) {
   switch (action.type) {
@@ -21,12 +22,14 @@ export default function shopReducer(state = initialData, action) {
       return { ...initialData };
     case LOG_OUT:
       return { ...state };
+    case LOG_OUT_SESSION:
+      return { ...state, loading: false, active: false, user: null };
     default:
       return { ...state };
   }
 }
 
-// Actions
+// Actions, Login by Google Account
 export const loginUser = () => async (dispatch, getState) => {
   dispatch({
     type: LOADING,
@@ -80,6 +83,7 @@ export const loginUser = () => async (dispatch, getState) => {
     });
   }
 };
+// Actions, Login By E-mail
 export const loginUserEmail =
   (email, password, name) => async (dispatch, getState) => {
     dispatch({
@@ -137,10 +141,21 @@ export const loginUserEmail =
       });
     }
   };
-// Actions
+// Actions, close Modal
 export const closeModal = (isOpen) => async (dispatch, getState) => {
   dispatch({
     type: LOG_OUT,
     payload: isOpen,
+  });
+};
+// Actions, Log out user
+export const logOutUser = () => async (dispatch, getState) => {
+  try {
+    firebase.auth().signOut();
+  } catch (error) {
+    console.log(error);
+  }
+  dispatch({
+    type: LOG_OUT_SESSION,
   });
 };

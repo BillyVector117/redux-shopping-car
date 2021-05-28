@@ -1,3 +1,4 @@
+// This function returns a Number format to Amount/currency format
 const AmountFormat = (amount) => {
   return new Intl.NumberFormat("en-US", {
     style: "currency",

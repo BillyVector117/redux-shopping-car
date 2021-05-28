@@ -1,5 +1,6 @@
 import { createStore, combineReducers, compose, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
+// Actions/ Reducers
 import shopReducer from "./shopActions";
 import FormReducer from "./FormActions";
 import userReducer from "./UserActions";
@@ -8,7 +9,7 @@ const rootReducer = combineReducers({
   mainShop: shopReducer,
   openModal: FormReducer,
   user: userReducer,
-  // Another reducer
+  // Another reducer...
 });
 // DevToold Config
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

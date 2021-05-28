@@ -1,4 +1,6 @@
+// Dependencies
 import React from "react";
+// Styles
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -22,7 +24,7 @@ function Footer() {
       <Container maxWidth="md">
         <Toolbar>
           <Typography variant="body1" color="inherit">
-            © 2021 Billy Rodríguez Morales - GitHub:{" "}
+            © 2021 Billy Rodríguez Morales - GitHub:
             <a
               className={classes.link}
               href="https://github.com/BillyVector117"

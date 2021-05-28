@@ -1,4 +1,13 @@
+// Dependencies
 import React, { useEffect, useState } from "react";
+// Libraries
+import { useHistory } from "react-router-dom";
+// Elements
+import AlertMessage from "../elements/AlertMessage";
+// Redux
+import { addToCar, addToWish, removeToWish } from "../redux/shopActions";
+import { useDispatch, useSelector } from "react-redux";
+// Styles
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -14,10 +23,6 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import ShareIcon from "@material-ui/icons/Share";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Button from "@material-ui/core/Button";
-import { addToCar, addToWish, removeToWish } from "../redux/shopActions";
-import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import AlertMessage from "../elements/AlertMessage";
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
@@ -42,42 +47,51 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Cards({
+  // Default data
   id = "0",
-  title = "undefiend",
-  category = "undefiend",
-  price = "undefiend",
-  description = "undefiend",
-  image = "undefiend",
+  title = "undefined",
+  category = "undefined",
+  price = "undefined",
+  description = "undefined",
+  image = "undefined",
   quantity = 1,
-  wishListProducts,
+  wishListProducts, // Array
 }) {
-  const products = useSelector((store) => store.mainShop.myWishList);
-
-  const dispatch = useDispatch();
-  const history = useHistory();
   const classes = useStyles();
-  const [message, setMessage] = useState("");
-  const [type, setType] = useState("");
+  const history = useHistory();
+  // Global state
+  const wishListProductsState = useSelector((store) => store.mainShop.myWishList);
+  const dispatch = useDispatch();
+  // Internal state
+  const [message, setMessage] = useState(""); // Custom message
+  const [type, setType] = useState(""); // Custom message
   const [filled, setFilled] = useState(false);
+
+  // This effect allows to check if a product is saved at WishList, if true, set a filled hearth icon, else an empty hearth icon
   useEffect(() => {
-    // console.log("my wish-List: ", wishListProducts);
+    // console.log("My wish List items: ", wishListProducts);
     const isThisProductInWishList = wishListProducts.filter((element) => {
       return element.id === id;
     });
-    // console.log("product in wishList: ", isThisProductInWishList); // Ensure this maped product exists in WishList state
 
+    // console.log("Product in wishList: ", isThisProductInWishList); // Ensure this maped product exists in WishList state
     if (isThisProductInWishList.length !== 0) {
       setFilled(true);
-      console.log("id found");
+      // console.log("ID found");
     } else {
-      console.log("No id found!");
+      // console.log("No ID found!");
     }
   }, [id, wishListProducts]);
+
   const handlerClickImage = () => {
-    // console.log("Product clicked");
+    // console.log("Redirecting to propduct clicked");
     history.push(`/productInfo/${id}`);
   };
+  // Adding to car action
   const handlerClickButton = (event) => {
+    event.preventDefault();
+
+    // Capture all data from this maped item
     const product = {
       id,
       title,
@@ -98,6 +112,7 @@ function Cards({
   };
   const handlerClickFavorite = (event) => {
     event.preventDefault();
+    // If this product already exists in WishList then remove from WishList else, add it.
     if (filled) {
       const product = {
         id,
@@ -116,10 +131,10 @@ function Cards({
         setMessage("");
         setType("");
       }, 3000);
-      console.log("Removing from WishList");
+      // console.log("This item is removed from WishList");
       return;
     } else {
-      console.log("Adding to WishList");
+      // console.log("Adding to WishList");
       const product = {
         id,
         title,
@@ -129,8 +144,11 @@ function Cards({
         image,
         quantity,
       };
-      const found = products.find((el) => el.id === product.id);
-      console.log("found: ", found);
+      const found = wishListProductsState.find(
+        (element) => element.id === product.id
+      );
+      // console.log("Product found: ", found);
+      // If this product does not exists at WishList state, then added.
       if (!found) {
         dispatch(addToWish(product));
         setFilled(true);

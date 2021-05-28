@@ -1,11 +1,15 @@
+// Dependencies
 import React, { useEffect } from "react";
+// Elements
+import Form from "./Form";
+// Redux
+import { useDispatch, useSelector } from "react-redux";
+import { openModal, closeModal } from "../redux/FormActions";
+// Styles
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
-import Form from "./Form";
-import { useDispatch, useSelector } from "react-redux";
-import { openModal, closeModal } from "../redux/FormActions";
 import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => ({
@@ -23,9 +27,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ModalTemplate() {
-  const dispatch = useDispatch();
   const classes = useStyles();
-  const isOpenModal = useSelector((store) => store.openModal.isOpen); // Boolean variable
+  // Global state (Redux)
+  const isOpenModal = useSelector((store) => store.openModal.isOpen); // Boolean variable (Default false)
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(openModal(true));
