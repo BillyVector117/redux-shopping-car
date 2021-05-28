@@ -1,3 +1,35 @@
+#react #react-router-dom #reactHooks #Redux #reduxDucks #materialUi #firebase #fireAuth
+
+React Shop-car Application using React to manage global state, styled with materialUI and backend with firebase technologies
+
+Index page ->
+![Image1-Index](https://github.com/BillyVector117/redux-shopping-car/blob/main/Screenshot_1.png)
+-> Login / Sign Up section
+![login-pic](https://github.com/BillyVector117/redux-shopping-car/blob/main/Screenshot_2.png)
+-> Pagination
+![main-pagination](https://github.com/BillyVector117/redux-shopping-car/blob/main/Screenshot_3.png)
+Car page ->
+![Car-Index](https://github.com/BillyVector117/redux-shopping-car/blob/main/Screenshot_4.png)
+-> WishList / Sign Up section
+![WishList-pic](https://github.com/BillyVector117/redux-shopping-car/blob/main/Screenshot_5.png)
+-> Preview
+![Preview-pagination](https://github.com/BillyVector117/redux-shopping-car/blob/main/Screenshot_6.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
