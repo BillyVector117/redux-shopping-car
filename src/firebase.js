@@ -4,12 +4,12 @@ import "firebase/firestore"; // Import firestore methods
 // import "firebase/storage"; // Import storage methods
 
 var firebaseConfig = {
-  apiKey: "AIzaSyA6MmejWqYW2GZinKP7DACSM13oBLI9fug",
-  authDomain: "redux-store-d4ea2.firebaseapp.com",
-  projectId: "redux-store-d4ea2",
-  storageBucket: "redux-store-d4ea2.appspot.com",
-  messagingSenderId: "316787658739",
-  appId: "1:316787658739:web:ce3e5e63ea3230f8cc8c86",
+  apiKey: "YOUR_FIREBASE_APP_CONFIG",
+  authDomain: "YOUR_FIREBASE_APP_CONFIG",
+  projectId: "YOUR_FIREBASE_APP_CONFIG",
+  storageBucket: "YOUR_FIREBASE_APP_CONFIG",
+  messagingSenderId: "YOUR_FIREBASE_APP_CONFIG",
+  appId: "YOUR_FIREBASE_APP_CONFIG",
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
